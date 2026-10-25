@@ -1,0 +1,12 @@
+{
+  "name": "Gravity Hopper — a tiny physics adventure",
+  "short_name": "Gravity Hopper",
+  "description": "An offline, friendly physics platform adventure.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#101a2c",
+  "theme_color": "#111d32",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any 192x192 512x512", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

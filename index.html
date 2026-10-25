@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#1b1438">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Gravity Hopper — An interactive 2D physics platformer adventure for ages 9-12.">
+  <title>Gravity Hopper — Sky Lab Physics Adventure</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app" aria-label="Gravity Hopper game">
+    <!-- Top Navigation & Status Bar -->
+    <header class="topbar">
+      <a class="brand" href="#home" id="home-link" aria-label="Gravity Hopper Home">
+        <img src="assets/icon.svg" alt="" class="brand-icon" width="32" height="32">
+        <span class="brand-title">GRAVITY <b>HOPPER</b></span>
+      </a>
+
+      <div class="level-pill" id="level-status">Sky Lab Physics Adventure</div>
+
+      <div class="top-actions">
+        <span id="offline-badge" class="offline-badge" title="Works offline">
+          <i></i> <span class="badge-text">ready</span>
+        </span>
+        <button id="hints-button" class="icon-button active" aria-label="Toggle physics hints (H)" title="Physics Vectors & Hints (H)">
+          <span>⚡</span>
+        </button>
+        <button id="sound-button" class="icon-button" aria-label="Toggle sound volume" title="Sound Volume">
+          <span>♬</span>
+        </button>
+        <button id="fullscreen-button" class="icon-button" aria-label="Toggle fullscreen" title="Fullscreen Mode">
+          <span>⛶</span>
+        </button>
+        <button id="pause-button" class="icon-button" aria-label="Pause game (P or Esc)" title="Pause (P or Esc)">
+          <span>Ⅱ</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Interactive Game Stage -->
+    <section class="game-wrap" id="game-wrap" aria-label="Game stage">
+      <canvas id="game" width="960" height="600" tabindex="0"
+        aria-label="Gravity Hopper canvas. Use Left/Right or A/D to run, hold Space or Up to jump higher, Down to open parachute glider, X to carry crate.">
+      </canvas>
+
+      <!-- Ergonomic Mobile & Tablet Touch Controls -->
+      <div class="mobile-controls" id="mobile-controls" aria-label="Touch controls">
+        <!-- Left Thumb: Directional Pad (supports thumb sliding between Left & Right) -->
+        <div class="dpad-group" id="dpad-group">
+          <button type="button" class="touch-btn dpad-btn" data-control="left" aria-label="Move Left">
+            <span class="arrow">◀</span>
+            <small>LEFT</small>
+          </button>
+          <button type="button" class="touch-btn dpad-btn" data-control="right" aria-label="Move Right">
+            <span class="arrow">▶</span>
+            <small>RIGHT</small>
+          </button>
+        </div>
+
+        <!-- Right Thumb: Action & Variable-Hold Jump Cluster -->
+        <div class="action-group">
+          <button type="button" class="touch-btn aux-btn" id="touch-crate" data-control="crate" aria-label="Pick up or drop crate" hidden>
+            <span class="icon">📦</span>
+            <small>CRATE</small>
+          </button>
+          <button type="button" class="touch-btn aux-btn" id="touch-glide" data-control="down" aria-label="Hold for Parachute Glider">
+            <span class="icon">🪂</span>
+            <small>GLIDE</small>
+          </button>
+          <button type="button" class="touch-btn jump-btn" data-control="jump" aria-label="Tap for small hop, hold for big jump">
+            <span class="jump-title">JUMP</span>
+            <small>HOLD = HIGHER</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Helper Bar -->
+    <footer class="statusbar">
+      <div class="key-help">
+        <span>RUN <kbd>◀</kbd><kbd>▶</kbd></span>
+        <span>VARIABLE JUMP <kbd>HOLD SPACE</kbd></span>
+        <span>GLIDE <kbd>▼</kbd></span>
+        <span>CRATE <kbd>X</kbd></span>
+        <span>RESTART <kbd>R</kbd></span>
+      </div>
+      <div class="footer-actions">
+        <button id="restart-button" class="text-button" title="Restart current level (R)">↻ Restart</button>
+        <button id="help-button" class="text-button" title="How to Play & Teacher Guide">? Guide &amp; Physics</button>
+      </div>
+    </footer>
+  </main>
+
+  <script src="levels.js" defer></script>
+  <script src="physics.js" defer></script>
+  <script src="game.js" defer></script>
+  <script>
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      window.addEventListener('load', () =>
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => navigator.serviceWorker.ready)
+          .then(() => {
+            const el = document.querySelector('#offline-badge .badge-text');
+            if (el) el.textContent = 'offline ready';
+          })
+          .catch(() => {
+            const el = document.querySelector('#offline-badge .badge-text');
+            if (el) el.textContent = 'ready';
+          })
+      );
+    }
+  </script>
+</body>
+</html>

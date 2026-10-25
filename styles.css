@@ -1,0 +1,412 @@
+/**
+ * GRAVITY HOPPER — Modern Responsive & Mobile-First Stylesheet
+ * Optimized for phones, tablets, and desktop browsers.
+ */
+:root {
+  color-scheme: dark;
+  --ink: #f8f9ff;
+  --muted: #b8c4e0;
+  --gold: #ffd166;
+  --amber: #f48c06;
+  --mint: #56efc4;
+  --cyan: #4ea8de;
+  --coral: #ff6b8b;
+  --bg-deep: #15112b;
+  --bg-mid: #231b42;
+  --glass: rgba(25, 22, 48, 0.78);
+  --line: rgba(255, 230, 175, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, #372563 0%, #1c1638 55%, #0e0b20 100%);
+  color: var(--ink);
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6px, 1.5vw, 18px);
+  padding-top: max(6px, env(safe-area-inset-top));
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
+  padding-left: max(6px, env(safe-area-inset-left));
+  padding-right: max(6px, env(safe-area-inset-right));
+}
+
+.app {
+  width: min(1160px, 100%);
+  height: 100%;
+  max-height: 780px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 8px;
+}
+
+/* Top Bar */
+.topbar,
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 12px;
+  background: rgba(24, 19, 46, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.brand b {
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  box-shadow: 0 3px 12px rgba(255, 183, 3, 0.35);
+}
+
+.level-pill {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffe8a3;
+  background: rgba(255, 209, 102, 0.12);
+  border: 1px solid rgba(255, 209, 102, 0.28);
+  padding: 5px 14px;
+  border-radius: 99px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.offline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(86, 239, 196, 0.12);
+  border: 1px solid rgba(86, 239, 196, 0.32);
+  border-radius: 99px;
+  padding: 5px 10px;
+  color: #b8ffea;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.offline-badge i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 8px var(--mint);
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.icon-button:hover,
+.text-button:hover {
+  border-color: var(--gold);
+  background: rgba(255, 209, 102, 0.16);
+  color: var(--gold);
+}
+
+.icon-button.active {
+  border-color: var(--mint);
+  background: rgba(86, 239, 196, 0.18);
+  color: var(--mint);
+}
+
+.icon-button:active,
+.text-button:active {
+  transform: scale(0.94);
+}
+
+/* Game Stage Container */
+.game-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 214, 138, 0.28);
+  background: #141028;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), inset 0 0 24px rgba(255, 195, 113, 0.08);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  touch-action: none;
+}
+
+canvas:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -3px;
+}
+
+/* Bottom Status Bar */
+.statusbar {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.key-help {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.key-help kbd {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 2px 6px;
+  margin-left: 3px;
+  color: var(--gold);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.text-button {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 6px 12px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Touch Controls Overlay for Phones & Tablets */
+.mobile-controls {
+  display: none;
+  position: absolute;
+  inset: auto 0 12px 0;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 clamp(10px, 3vw, 26px);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.dpad-group,
+.action-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.touch-btn {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: rgba(24, 20, 48, 0.78);
+  color: #fff8eb;
+  border: 2px solid rgba(255, 224, 158, 0.42);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: transform 0.06s ease, background 0.08s ease;
+}
+
+.touch-btn[hidden] {
+  display: none !important;
+}
+
+.dpad-btn {
+  width: clamp(64px, 14vw, 82px);
+  height: clamp(58px, 12vw, 72px);
+}
+
+.dpad-btn .arrow {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.touch-btn small {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+
+.aux-btn {
+  width: clamp(58px, 12vw, 72px);
+  height: clamp(54px, 11vw, 66px);
+  background: rgba(45, 76, 128, 0.82);
+  border-color: rgba(130, 208, 255, 0.55);
+}
+
+.aux-btn .icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.jump-btn {
+  width: clamp(88px, 18vw, 116px);
+  height: clamp(66px, 14vw, 84px);
+  background: linear-gradient(180deg, #ffd166 0%, #f48c06 100%);
+  color: #1d1204;
+  border: 2px solid #fff3b0;
+  border-radius: 22px;
+  box-shadow: 0 8px 24px rgba(244, 140, 6, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+.jump-btn .jump-title {
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.jump-btn small {
+  color: #362003;
+  font-weight: 900;
+}
+
+.touch-btn.down {
+  transform: translateY(3px) scale(0.96);
+  filter: brightness(1.18);
+  border-color: #ffffff;
+}
+
+/* Show touch controls automatically on touch devices (phones/tablets) or narrow screens */
+@media (pointer: coarse), (max-width: 920px) {
+  .mobile-controls {
+    display: flex;
+  }
+  .key-help {
+    display: none;
+  }
+}
+
+/* Compact phone layout adjustments */
+@media (max-width: 720px) {
+  body {
+    padding: 4px;
+  }
+  .app {
+    gap: 5px;
+  }
+  .topbar,
+  .statusbar {
+    padding: 4px 8px;
+    border-radius: 10px;
+  }
+  .brand-title {
+    font-size: 13px;
+  }
+  .brand-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .level-pill {
+    font-size: 11px;
+    padding: 4px 9px;
+  }
+  .offline-badge {
+    display: none;
+  }
+  .icon-button {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  .game-wrap {
+    border-radius: 14px;
+  }
+}
+
+/* Short landscape phone screens: maximize stage area */
+@media (max-height: 500px) {
+  body {
+    padding: 2px 6px;
+  }
+  .app {
+    grid-template-rows: auto 1fr;
+    gap: 4px;
+  }
+  .statusbar {
+    display: none;
+  }
+  .topbar {
+    padding: 3px 10px;
+  }
+  .mobile-controls {
+    bottom: 8px;
+  }
+}
